@@ -1,14 +1,21 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
+import { useSession } from "next-auth/react"
 import { Menu, Transition } from '@headlessui/react'
 import { FaBars } from "react-icons/fa";
 
 export default function Navbar() {
   
+  const { data: session } = useSession();
+  
   const navLinks = [
     {
       name: "Home",
       destination: "/"
+    },
+    {
+      name: session ? "SignOut" : "SignIn",
+      destination: session ? "/auth/signout" : "/auth/signin"
     },
     {
       name: "Apply for blog",

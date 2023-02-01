@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useSession } from "next-auth/react"
 import { Inter } from '@next/font/google'
 import Navbar from '../components/navigation/navbar'
 import Blogs from '../components/home/blogs'
@@ -9,8 +10,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   
-  
-  
+  const { data: session } = useSession();
+ 
   return (
     <div>
       <Head>
@@ -26,7 +27,9 @@ export default function Home() {
         <Navbar />
       
       </header>
+      <div className="bg-gray-200">
       <Blogs />
+      </div>
 
     </div>
   )

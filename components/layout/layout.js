@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Footer from '../navigation/footer'
 
 export default function Layout({ children }) {
   return (
@@ -9,6 +10,7 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>{children}</main>
+      <Footer />
     </>
   );
 }

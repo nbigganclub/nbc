@@ -1,4 +1,7 @@
 import Head from 'next/head'
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "../api/auth/[...nextauth]"
+import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router'
 import { useRef, useState } from "react";
 import { doc, addDoc, updateDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -17,6 +20,10 @@ export default function ApplyForBlog() {
   
   const router = useRouter();
   
+  const { data: session } = useSession();
+  
+  console.log(session)
+  
   const onSubmit = async(data) => {
     setLoading(true);
     setProgress(0);
@@ -25,10 +32,15 @@ export default function ApplyForBlog() {
       const docRef = await addDoc(collection(db, 'posts'), {
         title: data.title,
         description: data.description,
-        authorUid: null,
-        authorName: "",
-        views: 0,
-        timestamp: serverTimestamp()
+        author: {
+          uid: session.user.id,
+          name: session.user.name,
+        },
+        viewedBy: [],
+        edited: false,
+        timestamp: serverTimestamp(),
+        comments: [],
+        reactsBy: []
       });
       const eRef = doc(db, 'posts', docRef.id);
       if(!selectedFile) {
@@ -64,7 +76,7 @@ export default function ApplyForBlog() {
               });
               setStatus({ type: true, text: "Uploaded successfully!" });
               setSelectedFile(null);
-              router.back();
+              router.push("/");
             });
         }
       )
@@ -83,7 +95,7 @@ export default function ApplyForBlog() {
   
 
   return (
-    <div className="max-w-5xl mx-auto p-3 lg:p-0">
+    <div className="max-w-5xl mx-auto p-3 lg:p-0 min-h-[600px]">
       <Head>
         <title>Apply for Blog</title>
       </Head>
@@ -144,7 +156,7 @@ export default function ApplyForBlog() {
           >
             <p>Choose Thumbnail</p>
           </button>
-          <p className="text-sm">{selectedFile?.name}</p>
+          <p className="text-sm max-w-[250px] truncate">{selectedFile?.name}</p>
         </div>
           
         {progress > 0 && (
@@ -163,4 +175,23 @@ export default function ApplyForBlog() {
       </form>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getServerSession(
+        context.req,
+        context.res,
+        authOptions);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+      }
+    }
+  }
+  return {
+    props: {
+      session: session.user,
+    },
+  }
 }

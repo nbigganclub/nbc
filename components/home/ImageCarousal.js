@@ -13,13 +13,13 @@ export default function ImageCarousal({ className }) {
             </div>
             <Carousel showThumbs={false} className={className}>
                 <div>
-                    <img src={image1.src} height="400" width="400" />
+                    <img src={image1.src} alt="Slide 1" height="400" width="400" />
                 </div>
                 <div>
-                    <img src={image2.src} height="400" width="400" />
+                    <img src={image2.src} alt="Slide 2" height="400" width="400" />
                 </div>
                 <div>
-                    <img src={image3.src} height="400" width="400" />
+                    <img src={image3.src} alt="Slide 3" height="400" width="400" />
                 </div>
             </Carousel>
         </section>

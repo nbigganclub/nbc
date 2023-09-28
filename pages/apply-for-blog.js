@@ -165,7 +165,7 @@ export default function ApplyForBlog() {
             </div>
           </div>
         )}
-        <p className="text-sm italic text-center">* Your post will send to admin panel and wait for approve</p>
+        <p className="text-sm italic text-center">* Your post will be sent to the admin panel and will wait for approval.</p>
         {status.text && <p className={`text-sm my-2 font-medium text-center ${status.type ? "text-green-500" : "text-red-500"}`}>{status.text}</p>}
         <button type="submit" disabled={loading} className="w-full py-1.5 text-center text-sm bg-blue-500 rounded text-white dark:text-gray-200 transition-all flex items-center justify-center space-x-2 hover:bg-blue-700 disabled:bg-blue-500/50 font-medium">
           {loading && <CgSpinner className="h-5 w-5 animate-spin" />}

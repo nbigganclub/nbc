@@ -27,7 +27,7 @@ export default function Blog({ data }) {
       className="w-full max-w-[400px] mx-auto h-[500px] rounded shadow-lg overflow-hidden"
     >
       <div className="relative w-full h-56">
-        <Image src={data.thumbnail || noThumbnail.src} fill alt="" className="object-cover" />
+        <Image src={data.thumbnail || noThumbnail.src} fill alt="Blog banner" sizes='lg' className="object-cover" />
       </div>
       <div className="p-3">
         <p className="text-2xl h-16 font-semibold text-cyan-600 mt-2 truncate">{data.title}</p>

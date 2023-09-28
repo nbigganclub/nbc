@@ -4,6 +4,7 @@ import ImageCarousal from '@/components/home/ImageCarousal'
 import MembersList from '@/components/home/membersList'
 import { collection, getDocs, limit, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/firebase'
+import EventCard from '@/components/home/EventCard'
 
 
 export default function Home({ memberList, blogsData }) {
@@ -15,6 +16,7 @@ export default function Home({ memberList, blogsData }) {
       </Head>
 
       <div className="max-w-7xl mx-auto">
+        <EventCard />
         <div className="grid lg:grid-cols-2">
           <MembersList memberList={memberList} />
           <ImageCarousal className="w-[400px] lg:w-[600px] h-[350px] lg:h-[450px] mx-auto" />

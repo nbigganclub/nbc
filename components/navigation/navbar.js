@@ -24,7 +24,7 @@ export default function Navbar() {
       <div className="flex items-center space-x-5">
         {session && (
           <button onClick={() => signOut()} className="h-10 w-10 rounded-full overflow-hidden relative">
-            <Image src={session?.user?.profilePic || noThumbnail.src} fill alt="" className="object-cover" />
+            <Image src={session?.user?.profilePic || noThumbnail.src} fill alt="Navbar Logo" className="object-cover" />
           </button>
         )}
         <Menu as="div" className="relative inline-block">

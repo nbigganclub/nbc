@@ -8,7 +8,7 @@ export default function PeCard({ data, edit }) {
     return (
         <div className="rounded-xl border dark:border-gray-700 grid grid-cols-7 items-center w-[350px] h-[100px] mx-auto overflow-hidden px-3 py-1.5">
             <div className="relative h-[78px] w-[78px] rounded-full overflow-hidden col-span-2">
-                <Image src={data.profilePic || noProfilePic.src} alt="" fill className="object-cover" />
+                <Image src={data.profilePic || noProfilePic.src} alt="User profile" fill className="object-cover" />
             </div>
             <div className="relative col-span-5">
                 

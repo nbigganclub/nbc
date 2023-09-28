@@ -70,7 +70,7 @@ export default function Layout({ children }) {
         className="fixed z-[9999] bg-white dark:bg-gray-900 flex items-center justify-center h-screen w-full"
       >
         <div className="text-center">
-          <Image src={headerLogo.src} height="200" width="200" className="mx-auto" />
+          <Image src={headerLogo.src} alt="Splash logo" height="200" width="200" className="mx-auto" />
           <p className="text-sky-500 text-xl lg:text-3xl font-medium mb-3">Narsingdi Biggan Club</p>
           <p className="text-black dark:text-gray-200">Beta</p>
         </div>

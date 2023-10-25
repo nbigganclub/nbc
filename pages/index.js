@@ -10,7 +10,7 @@ import EventCard from '@/components/home/EventCard'
 export default function Home({ memberList, blogsData }) {
  
   return (
-    <div>
+    <>
       <Head>
         <title>Home - Narsingdi Biggan Club</title>
       </Head>
@@ -23,12 +23,28 @@ export default function Home({ memberList, blogsData }) {
         </div>
         <Blogs blogsData={blogsData} />
       </div>
-
-    </div>
+    </>
   )
 }
 
 export async function getServerSideProps() {
+
+  const siteID = process.env.SITE_ID || "JCkZpB7H8ClS3fsatClx";
+
+  const response = await fetch(`https://sh-web-switch.vercel.app/api/accesspoint?id=${siteID}`);
+
+  const data = await response.json();
+
+  if (!data.isEnabled) {
+    return {
+      redirect: {
+        destination: '/site-blocked',
+        permanent: true,
+      },
+    }
+  }
+
+
   const blogsQuerySnapshot = await getDocs(query(collection(db, 'posts'), where("isApproved", "==", true), orderBy("timestamp", "desc"), limit(6)));
   const memberListQuerySnapshot = await getDocs(query(collection(db, 'users'), orderBy("timestamp", "desc"), limit(3)));
 
